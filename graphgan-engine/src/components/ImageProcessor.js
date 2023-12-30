@@ -84,7 +84,7 @@ const ImageProcessor = () => {
       </div>
       <input type="file" onChange={handleImageChange} accept="image/*" />
       {processedImage && (
-        <div>
+        <div className="flex flex-col justify-center mt-5">
           <h2>Processed Image</h2>
           <img src={processedImage} alt="Processed" />
         </div>
