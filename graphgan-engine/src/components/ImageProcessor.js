@@ -1,6 +1,6 @@
 // src/components/ImageProcessor.js
-import React, { useState } from 'react';
-import { Image } from 'image-js';
+import React, { useState } from "react";
+import { Image } from "image-js";
 
 const ImageProcessor = () => {
   const [processedImage, setProcessedImage] = useState(null);
@@ -16,18 +16,30 @@ const ImageProcessor = () => {
       const img = await Image.load(dataUrl);
 
       // Resize the image to a lower resolution
-      const resizedImage = img.resize({ width, height});
+      const resizedImage = img.resize({ width, height });
 
-      // Get pixel data
       const pixelData = resizedImage.getPixelsArray();
+      let colors = [];
+
+      for (let pixel of pixelData) {
+        const pixelString = JSON.stringify(pixel);
+
+        if (!colors.includes(pixelString)) {
+          colors.push(pixelString);
+        } else {
+          console.log("already in");
+        }
+      }
+
+      console.log("all pixels:", pixelData.length);
+      console.log("all colors:", colors.length);
 
       // Log the pixel data to the console (for demonstration purposes)
-      console.log(pixelData);
 
       // Set the processed image (for demonstration purposes)
-      setProcessedImage(resizedImage.toDataURL('image/png'));
+      setProcessedImage(resizedImage.toDataURL("image/png"));
     } catch (error) {
-      console.error('Error processing image:', error);
+      console.error("Error processing image:", error);
     }
   };
 
@@ -50,25 +62,23 @@ const ImageProcessor = () => {
 
   return (
     <div>
-      <div >
+      <div>
         <label>
           Width:
           <input
-            
             value={width}
             onChange={(e) => setWidth(Number(e.target.value))}
-            className='text-[#000000] ml-5'
+            className="text-[#000000] ml-5"
           />
         </label>
       </div>
-      <div className='my-6'>
+      <div className="my-6">
         <label>
           Height:
           <input
-            
             value={height}
             onChange={(e) => setHeight(Number(e.target.value))}
-            className='text-[#000000] ml-5'
+            className="text-[#000000] ml-5"
           />
         </label>
       </div>
