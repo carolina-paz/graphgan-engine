@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Image } from "image-js";
 
+
 const ImageProcessor = () => {
   const [processedImage, setProcessedImage] = useState(null);
   const [width, setWidth] = useState(100);
